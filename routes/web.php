@@ -22,4 +22,7 @@ Route::get('/home', 'HomeController@home')->name('home');
 
 Route::group(['prefix' => 'admin','middleware' => ['admin']], function() {
     Route::get('/', 'AdminController@adminHome')->name('adminHome');
+    Route::get('/exams', 'AdminController@exams')->name('exams');
+    Route::post('/saveExam', 'AdminController@saveExam')->name('saveExam');
+    
 });
