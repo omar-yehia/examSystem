@@ -9,13 +9,9 @@ use Session;
 class AdminController extends Controller
 {
     public function adminHome(){
-        $exams=DB::table('exams')->get();
-        $results=DB::table('student_exam')->get();
-        $results=$results->groupBy('student_id')->groupBy('exam_id');
-
+        $students=DB::table('users')->where('type',0)->paginate(10);
         return view('admin.home')->with([
-            'exams'=>$exams,
-            'results'=>$results,
+            'students'=>$students,
         ]);
     }
     public function exams(Request $request){
@@ -90,6 +86,22 @@ class AdminController extends Controller
         ]);
         if($inserted){return redirect()->back()->with('success','added successfully!');}
         return redirect()->back()->with('error','was not added successfully!');
+    }
+    public function student($id){
+        $student=DB::table('users')->where(['type'=>0,'id'=>$id])->first();
+        if(!$student){return redirect()->back()->with('error','invalid student');}
+        $student->exams=DB::table('exams')
+            ->select('exams.*','exams.id as examid','student_exam.*')
+            ->join('student_exam','student_exam.exam_id','=','exams.id')
+            ->where('student_id',$id)
+            ->paginate(10);
+        foreach ( $student->exams as $exam) {
+            $exam->status=$this->getExamStatus($exam->examid,$id)['exam_status'];
+        }
+
+        return view('admin.student')->with([
+            'student'=>$student
+        ]);
     }
 
 }

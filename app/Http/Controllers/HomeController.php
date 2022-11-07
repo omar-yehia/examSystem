@@ -35,20 +35,7 @@ class HomeController extends Controller
             'allExams'=>$allExams
         ]);
     }
-    private function getExamStatus($exam_id){
-        $student_id=Auth()->user()->id;
-        $exam=DB::table('exams')->where('id',$exam_id)->first();
-        if(!$exam){return ['return'=>-1,'code'=>1,'status'=>'invalid'];}
-        $hasStarted=DB::table('student_exam')->where([
-            'student_id'=>$student_id,
-            'exam_id'=>$exam_id
-        ])->first();
-        if(!$hasStarted){return ['return'=>0,'code'=>2,'exam_status'=>'not started'];}
-        if($hasStarted->end_time){return ['return'=>0,'code'=>3,'exam_status'=>'finished'];}
-        $timeRemaining = ((60*$exam->time)+strtotime($hasStarted->start_time))-time();
-        if($timeRemaining<=0){return ['return'=>0,'code'=>3,'exam_status'=>'time over'];}
-        return ['return'=>1,'code'=>3,'exam_status'=>'ongoing','timeRemaining'=>$timeRemaining];
-    }
+    
     public function startExam(Request $request){
         $student_id=Auth()->user()->id;
         $exam=DB::table('exams')->where('id',$request->exam_id)->first();

@@ -38,6 +38,8 @@ Route::group(['prefix' => 'admin','middleware' => ['admin']], function() {
 
     Route::get('/answer/{id}', 'AdminController@answer')->name('answer');
     Route::post('/saveAnswer', 'AdminController@saveAnswer')->name('saveAnswer');
+    Route::get('/student/{id}', 'AdminController@student')->name('student');
 
+    
     
 });
