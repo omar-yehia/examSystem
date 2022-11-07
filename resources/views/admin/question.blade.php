@@ -13,31 +13,31 @@
 @endif
 
 <div class="container">
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active"><a href="{{route('exams')}}">Exams</a></li>
-    <li class="breadcrumb-item"><a href="{{route('exam',['id'=>$question->exam->id])}}">{{$question->exam->title}}</a></li>
-    <li class="breadcrumb-item"><a href="{{route('question',['id'=>$question->id])}}">{{$question->content}}</a></li>
-  </ol>
-</nav>
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a href="{{route('exams')}}">Exams</a></li>
+        <li class="breadcrumb-item"><a href="{{route('exam',['id'=>$question->exam->id])}}">{{$question->exam->title}}</a></li>
+        <li class="breadcrumb-item"><a href="{{route('question',['id'=>$question->id])}}">{{$question->content}}</a></li>
+    </ol>
+    </nav>
     
     <h3>Add Answer</h3>
         
-        <form method="POST" action="{{route('saveAnswer')}}">
-            {{csrf_field()}}
-            <input hidden name="exam_id" value="{{$question->exam->id}}" required>
-            <input hidden name="question_id" value="{{$question->id}}" required>
+    <form method="POST" action="{{route('saveAnswer')}}">
+        {{csrf_field()}}
+        <input hidden name="exam_id" value="{{$question->exam->id}}" required>
+        <input hidden name="question_id" value="{{$question->id}}" required>
 
-            <label for="content">Content</label>
-            <textarea class="form-control" id="content" name="content" placeholder="answer content" required></textarea>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" name="is_correct" id="is_correct">
-                <label class="form-check-label" for="is_correct">is correct</label>
-            </div>
-            <button class="btn btn-primary">Save</button>
-        </form>
-        <hr>
-        <br>
+        <label for="content">Content</label>
+        <textarea class="form-control" id="content" name="content" placeholder="answer content" required></textarea>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" name="is_correct" id="is_correct">
+            <label class="form-check-label" for="is_correct">is correct</label>
+        </div>
+        <button class="btn btn-primary">Save</button>
+    </form>
+    <hr>
+    <br>
     <h3>All Answers</h3>
     <div class="table-responsive">
         <table class="table">

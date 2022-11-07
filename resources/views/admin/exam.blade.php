@@ -13,30 +13,29 @@
 @endif
 
 <div class="container">
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active"><a href="{{route('exams')}}">Exams</a></li>
-    <li class="breadcrumb-item"><a href="{{route('exam',['id'=>$exam->id])}}">{{$exam->title}}</a></li>
-    <!-- <li class="breadcrumb-item"><a href="#">Questoin Name</a></li> -->
-  </ol>
-</nav>
-       
-        <h3>Add Question</h3>
-        <form method="POST" action="{{route('saveQuestion')}}">
-            {{csrf_field()}}
-            <input hidden name="exam_id" value="{{$exam->id}}" required>
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a href="{{route('exams')}}">Exams</a></li>
+        <li class="breadcrumb-item"><a href="{{route('exam',['id'=>$exam->id])}}">{{$exam->title}}</a></li>
+    </ol>
+    </nav>
+    
+    <h3>Add Question</h3>
+    <form method="POST" action="{{route('saveQuestion')}}">
+        {{csrf_field()}}
+        <input hidden name="exam_id" value="{{$exam->id}}" required>
 
-            <div class="form-group">
+        <div class="form-group">
             <label for="content">Content</label>
             <textarea class="form-control" rows="4" cols="5" id="content" name="content" placeholder="question content" required></textarea>
-</div>
-            <label for="score">score</label>
-            <input id="score" name="score" type="number" min="1" required>
+        </div>
+        <label for="score">score</label>
+        <input id="score" name="score" type="number" min="1" required>
 
-            <button class="btn btn-primary">Save</button>
-        </form>
-        <hr>
-        <br>
+        <button class="btn btn-primary">Save</button>
+    </form>
+    <hr>
+    <br>
     <h3>All Questions</h3>
     <div class="table-responsive">
         <table class="table">

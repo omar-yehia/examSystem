@@ -13,6 +13,11 @@
 @endif
 
 <div class="container">
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a href="{{route('studentExams')}}">Exams</a></li>
+    </ol>
+</nav>
 <h4>remaining time<span id="remaining_time"></span></h4>
 <h1>Exam: {{$exam->title}}</h1>
 <form action="{{route('submitAnswers')}}" method="POST">
