@@ -17,12 +17,24 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@home')->name('home');
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/home', 'HomeController@home')->name('home');
+    Route::get('/exams', 'HomeController@studentExams')->name('studentExams');
+    Route::post('/startExam', 'HomeController@startExam')->name('startExam');
+});
 
 
 Route::group(['prefix' => 'admin','middleware' => ['admin']], function() {
     Route::get('/', 'AdminController@adminHome')->name('adminHome');
     Route::get('/exams', 'AdminController@exams')->name('exams');
+    Route::get('/exam/{id}', 'AdminController@exam')->name('exam');
     Route::post('/saveExam', 'AdminController@saveExam')->name('saveExam');
+    
+    Route::get('/question/{id}', 'AdminController@question')->name('question');
+    Route::post('/saveQuestion', 'AdminController@saveQuestion')->name('saveQuestion');
+
+    Route::get('/answer/{id}', 'AdminController@answer')->name('answer');
+    Route::post('/saveAnswer', 'AdminController@saveAnswer')->name('saveAnswer');
+
     
 });

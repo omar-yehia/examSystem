@@ -25,8 +25,8 @@ class CreateStudentExamTable extends Migration
             $table->foreign('student_id',)->references('id')->on('users')->onDelete('cascade');
 
             $table->integer('score')->default(0);
-            $table->boolean('action')->comment('0=>started exam , 1=>ended exam');
-            $table->datetime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->datetime('end_time')->nullable();
+            $table->datetime('start_time')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

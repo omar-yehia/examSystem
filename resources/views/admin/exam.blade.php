@@ -11,57 +11,57 @@
     {{session('success')}}
 </div>
 @endif
+
 <div class="container">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item active"><a href="{{route('exams')}}">Exams</a></li>
-    <!-- <li class="breadcrumb-item"><a href="#">Exam Name</a></li>
-    <li class="breadcrumb-item"><a href="#">Questoin Name</a></li> -->
+    <li class="breadcrumb-item"><a href="{{route('exam',['id'=>$exam->id])}}">{{$exam->title}}</a></li>
+    <!-- <li class="breadcrumb-item"><a href="#">Questoin Name</a></li> -->
   </ol>
 </nav>
-        <h1>Add Exam</h1>
-        <form method="POST" action="{{route('saveExam')}}">
+       
+        <h3>Add Question</h3>
+        <form method="POST" action="{{route('saveQuestion')}}">
             {{csrf_field()}}
-            <label for="title">Title</label>
-            <input id="title" name="title" placeholder="exam title" required>
-            
-            <label for="total_score">Total Grade</label>
-            <input id="total_score" name="total_score" type="number" min="1" required>
+            <input hidden name="exam_id" value="{{$exam->id}}" required>
 
-            <label for="time">Total Time (in minutes)</label>
-            <input id="time" name="time" type="number" min="1" required>
+            <div class="form-group">
+            <label for="content">Content</label>
+            <textarea class="form-control" rows="4" cols="5" id="content" name="content" placeholder="question content" required></textarea>
+</div>
+            <label for="score">score</label>
+            <input id="score" name="score" type="number" min="1" required>
 
             <button class="btn btn-primary">Save</button>
         </form>
         <hr>
         <br>
-    <h1>All Exams</h1>
+    <h3>All Questions</h3>
     <div class="table-responsive">
         <table class="table">
-            <caption>List of exams</caption>
+            <caption>List of Questions</caption>
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Total Score</th>
-                    <th scope="col">Time</th>
+                    <th scope="col">Score</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($allExams as $exam)
+                @foreach($exam->questions as $question)
                 <tr>
-                    <th scope="row">{{$exam->id}}</th>
-                    <td>{{$exam->title}}</td>
-                    <td>{{$exam->total_score}}</td>
-                    <td>{{date('H:i', mktime(0,$exam->time))}} Hours</td>
-                    <td><a class="btn btn-primary" href="{{route('exam',['id'=>$exam->id])}}">questions</a></td>
+                    <th scope="row">{{$question->id}}</th>
+                    <td>{{$question->content}}</td>
+                    <td>{{$question->score}}</td>
+                    <td><a class="btn btn-primary" href="{{route('question',['id'=>$question->id])}}">answers</a></td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
         <div class="pagination-wrapper">
-         {{ $allExams->links() }}
+         {{ $exam->questions->links() }}
         </div>
     </div>
 
