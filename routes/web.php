@@ -21,6 +21,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/home', 'HomeController@home')->name('home');
     Route::get('/exams', 'HomeController@studentExams')->name('studentExams');
     Route::post('/startExam', 'HomeController@startExam')->name('startExam');
+    Route::post('/submitAnswers', 'HomeController@submitAnswers')->name('submitAnswers');
+
+    
 });
 
 

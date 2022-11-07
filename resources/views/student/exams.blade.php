@@ -33,7 +33,19 @@
                     <td>{{$exam->title}}</td>
                     <td>{{$exam->total_score}}</td>
                     <td>{{date('H:i', mktime(0,$exam->time))}} Hours</td>
-                    <td><a class="btn btn-primary" href="{{route('startExam',['id'=>$exam->id])}}">Start Exam</a></td>
+                    <td>
+                        @if($exam->status=='ended')
+                        Your Score {{$exam->score}}/{{$exam->total_score}}
+                        @else
+                            <form action="{{route('startExam')}}" method="POST">
+                                {{csrf_field()}}
+                                <input hidden name="exam_id" value="{{$exam->id}}">
+                                <button class="btn btn-primary">
+                                {{$exam->status=='ongoing'?"Resume Exam":"Start Exam"}}
+                                </button>
+                            </form>
+                        @endif
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
@@ -49,7 +61,7 @@
     $(document).ready( function(){
         setTimeout(() => {
             $('#error,#success').hide(400);
-        }, 300);
+        }, 2000);
     })
 </script>
 @endsection

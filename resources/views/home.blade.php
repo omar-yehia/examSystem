@@ -17,6 +17,7 @@
                     You are logged in!
                 </div>
             </div>
+            <a class="btn btn-primary" href="{{route('studentExams')}}">Exams</a>
         </div>
     </div>
 </div>
