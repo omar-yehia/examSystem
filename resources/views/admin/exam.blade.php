@@ -54,7 +54,11 @@
                     <th scope="row">{{$question->id}}</th>
                     <td>{{$question->content}}</td>
                     <td>{{$question->score}}</td>
-                    <td><a class="btn btn-primary" href="{{route('question',['id'=>$question->id])}}">answers</a></td>
+                    <td>
+                        <a class="btn btn-primary" href="{{route('question',['id'=>$question->id])}}">answers</a>
+                        <a class="btn btn-danger" href="{{route('deleteQuestion',['id'=>$question->id])}}" onclick="if(!confirm('are you sure you want to delete this question?')) return false;">delete</a>
+                    </td>
+
                 </tr>
                 @endforeach
             </tbody>
@@ -74,6 +78,7 @@
         return true;
     });
     $(document).ready( function(){
+        $('#content').focus();
         setTimeout(() => {
             $('#error,#success').hide(400);
         }, 300);

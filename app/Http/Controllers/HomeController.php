@@ -13,7 +13,7 @@ class HomeController extends Controller
     }
     public function studentExams(Request $request){
         $student_id=Auth()->user()->id;
-        $allExams=DB::table('exams')->paginate(10);
+        $allExams=DB::table('exams')->where('is_published',1)->paginate(10);
         foreach ($allExams as $exam) {
             $exam->score=0;
             $exam->status='';

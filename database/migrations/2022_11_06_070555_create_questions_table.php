@@ -15,9 +15,9 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('exam_id');
+            $table->bigInteger('exam_id')->unsigned();
             $table->index('exam_id');
-            $table->foreign('exam_id',)->references('id')->on('exams')->onDelete('cascade');
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
             $table->text('content',800);
             $table->integer('score');
             $table->datetime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

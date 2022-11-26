@@ -18,6 +18,7 @@ class CreateExamsTable extends Migration
             $table->text('title',100);
             $table->integer('total_score');
             $table->integer('time');
+            $table->boolean('is_published')->default(0);
             $table->datetime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }

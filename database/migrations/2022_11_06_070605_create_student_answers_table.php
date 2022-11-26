@@ -16,21 +16,21 @@ class CreateStudentAnswersTable extends Migration
         Schema::create('student_answers', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->bigInteger('exam_id');
+            $table->bigInteger('exam_id')->unsigned();
             $table->index('exam_id');
-            $table->foreign('exam_id',)->references('id')->on('exams')->onDelete('cascade');
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
             
-            $table->bigInteger('student_id');
+            $table->bigInteger('student_id')->unsigned();
             $table->index('student_id');
-            $table->foreign('student_id',)->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->bigInteger('question_id');
+            $table->bigInteger('question_id')->unsigned();
             $table->index('question_id');
-            $table->foreign('question_id',)->references('id')->on('questions')->onDelete('cascade');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
 
-            $table->bigInteger('answer_id');
+            $table->bigInteger('answer_id')->unsigned();
             $table->index('answer_id');
-            $table->foreign('answer_id',)->references('id')->on('questions')->onDelete('cascade');
+            $table->foreign('answer_id')->references('id')->on('questions')->onDelete('cascade');
 
             $table->datetime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

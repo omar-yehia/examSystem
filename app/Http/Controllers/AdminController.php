@@ -66,7 +66,7 @@ class AdminController extends Controller
         $question=DB::table('questions')->where('id',$id)->first();
         if(!$question){return redirect()->back()->with('error','invalid');}
         $question->exam=DB::table('exams')->where('id',$question->exam_id)->first();
-        $question->answers=DB::table('model_answers')->where('question_id',$question->id)->paginate(10);
+        $question->answers=DB::table('model_answers')->where('question_id',$question->id)->get();
         return view('admin.question')->with([
             'question'=>$question
         ]);
@@ -104,4 +104,22 @@ class AdminController extends Controller
         ]);
     }
 
+    public function deleteAnswer($id){
+        DB::table('model_answers')->where('id',$id)->delete();
+        return redirect()->back()->with('success','answer deleted successfully!');
+    }
+    public function deleteQuestion($id){
+        DB::table('questions')->where('id',$id)->delete();
+        return redirect()->back()->with('success','question deleted successfully!');
+    }
+    public function deleteExam($id){
+        DB::table('exams')->where('id',$id)->delete();
+        return redirect()->back()->with('success','exam deleted successfully!');
+    }
+    public function togglePublishExam($id){
+        $updated=DB::table('exams')->where('id',$id)->update(['is_published'=>DB::raw('not is_published')]);
+        return redirect()->back()->with('success','exam status was changed successfully!');
+    }
+    
 }
+

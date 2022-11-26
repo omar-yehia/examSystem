@@ -38,7 +38,7 @@
     </form>
     <hr>
     <br>
-    <h3>All Answers</h3>
+    <h3>Answers</h3>
     <div class="table-responsive">
         <table class="table">
             <caption>List of Answers</caption>
@@ -55,15 +55,14 @@
                 <tr>
                     <th scope="row">{{$answer->id}}</th>
                     <td>{{$answer->content}}</td>
-                    <td>{{$answer->is_correct?'Yes':''}}</td>
+                    <td class="{{$answer->is_correct?'bg-success':''}}">{{$answer->is_correct?'Yes':''}}</td>
                     <!-- <td><a class="btn btn-primary" href="{{route('answer',['id'=>$answer->id])}}">answers</a></td> -->
+                    <td><a class="btn btn-danger" href="{{route('deleteAnswer',['id'=>$answer->id])}}" onclick="if(!confirm('are you sure you want to delete this answer?')) return false;">delete</a></td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
-        <div class="pagination-wrapper">
-         {{ $question->answers->links() }}
-        </div>
+
     </div>
 
 </div>
@@ -76,6 +75,7 @@
         return true;
     });
     $(document).ready( function(){
+        $('#content').focus();
         setTimeout(() => {
             $('#error,#success').hide(400);
         }, 300);

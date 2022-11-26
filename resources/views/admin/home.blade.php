@@ -7,13 +7,12 @@
 
         <div class="table-responsive">
         <table class="table">
-            <caption>List of exams</caption>
+            <caption>List of students</caption>
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Total Score</th>
-                    <th scope="col">Time</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>

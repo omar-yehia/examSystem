@@ -16,13 +16,13 @@ class CreateStudentExamTable extends Migration
         Schema::create('student_exam', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->bigInteger('exam_id');
+            $table->bigInteger('exam_id')->unsigned();
             $table->index('exam_id');
-            $table->foreign('exam_id',)->references('id')->on('exams')->onDelete('cascade');
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
 
-            $table->bigInteger('student_id');
+            $table->bigInteger('student_id')->unsigned();
             $table->index('student_id');
-            $table->foreign('student_id',)->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->integer('score')->default(0);
             $table->datetime('end_time')->nullable();

@@ -22,8 +22,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/home', 'HomeController@home')->name('home');
     Route::get('/exams', 'HomeController@studentExams')->name('studentExams');
     Route::post('/startExam', 'HomeController@startExam')->name('startExam');
-    Route::post('/submitAnswers', 'HomeController@submitAnswers')->name('submitAnswers');
-
+    Route::post('/submitAnswers', 'HomeController@submitAnswers')->name('submitAnswers');    
     
 });
 
@@ -39,6 +38,11 @@ Route::group(['prefix' => 'admin','middleware' => ['admin']], function() {
 
     Route::get('/answer/{id}', 'AdminController@answer')->name('answer');
     Route::post('/saveAnswer', 'AdminController@saveAnswer')->name('saveAnswer');
+    Route::get('/deleteAnswer/{id}', 'AdminController@deleteAnswer')->name('deleteAnswer');
+    Route::get('/deleteQuestion/{id}', 'AdminController@deleteQuestion')->name('deleteQuestion');
+    Route::get('/deleteExam/{id}', 'AdminController@deleteExam')->name('deleteExam');
+    Route::get('/togglePublishExam/{id}', 'AdminController@togglePublishExam')->name('togglePublishExam');
+    
     Route::get('/student/{id}', 'AdminController@student')->name('student');
 
     

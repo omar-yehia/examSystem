@@ -15,9 +15,9 @@ class CreateModelAnswersTable extends Migration
     {
         Schema::create('model_answers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('question_id');
+            $table->bigInteger('question_id')->unsigned();
             $table->index('question_id');
-            $table->foreign('question_id',)->references('id')->on('questions')->onDelete('cascade');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
             $table->text('content',800);
             $table->boolean('is_correct');
             $table->datetime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

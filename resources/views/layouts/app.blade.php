@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ (Auth::user() && Auth::user()->isAdmin()==1)?'Admin':'Student'  }} Portal</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -37,12 +37,13 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand btn btn-success " href="{{route('home')}}">
-                    Student Portal
-                </a>
                 @if(Auth::user() && Auth::user()->isAdmin()==1)
                 <a class="navbar-brand btn btn-warning" href="{{route('adminHome')}}">
                     Admin Home
+                </a>
+                @else
+                <a class="navbar-brand btn btn-success " href="{{route('home')}}">
+                    Student Portal
                 </a>
                 @endif
 
